@@ -1,7 +1,10 @@
+import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
+
 const Transporter = () => {
     return (
       <div>
-          transporter
+        < BreadCrumbSection /> 
+        transporter
       </div>
     )
   }

@@ -1,0 +1,39 @@
+.card-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-item {
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+
+  .ant-card-body {
+    padding: 16px;
+  }
+
+  .ant-card-cover img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .ant-card-meta-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.card-item p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+}

@@ -1,7 +1,10 @@
+import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
+
 const LookUp = () => {
     return (
       <div>
-          lookUp
+        < BreadCrumbSection /> 
+        lookUp
       </div>
     )
   }

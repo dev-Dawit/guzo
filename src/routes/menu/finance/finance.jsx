@@ -1,7 +1,10 @@
+import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
+
 const Finance = () => {
     return (
       <div>
-          finance
+        < BreadCrumbSection separator={'/'}/> 
+        finance
       </div>
     )
   }

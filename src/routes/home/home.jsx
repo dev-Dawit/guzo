@@ -1,8 +1,12 @@
 import React from 'react'
+import { BreadCrumbSection } from '../../components/breadCrumb/breadCrumb';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      < BreadCrumbSection separator={'/'} />  
+      Home
+    </div>
   )
 }
 

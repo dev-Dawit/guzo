@@ -1,9 +1,12 @@
+import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
+import  CardList  from "../../../components/card-list/card-list.component"
 
 
 const Destination = () => {
   return (
     <div>
-        <h2>destination</h2>
+      < BreadCrumbSection separator={'/'} /> 
+      <CardList />
     </div>
   )
 }

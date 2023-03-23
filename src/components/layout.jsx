@@ -5,6 +5,7 @@ import { HeaderSection } from './header/header';
 import { SiderSection } from './sider/sider';
 import { FooterSection } from './footer/footer';
 import { ContentSection } from './content/content';
+import { BreadCrumbSection } from './breadCrumb/breadCrumb';
 
 
 const Theme = () => {
@@ -16,11 +17,7 @@ const Theme = () => {
       <Layout>
         < SiderSection />
         <Layout style={{ padding: '0 24px 0px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
+          <BreadCrumbSection style={{ margin: '16px 0' }} />
           < ContentSection />
           < FooterSection />
         </Layout>

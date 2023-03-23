@@ -16,13 +16,14 @@ import UserAdmin from '../../routes/menu/userAdmin/userAdmin';
 const { Content,} = Layout;
 
 export const ContentSection = () => {
+
   return (
     <Content
         style={{
             padding: 24,
             margin: 0,
             minHeight: 500,
-            //background: colorBgContainer,
+            background: 'grey',
         }}
     >
         <Routes>
