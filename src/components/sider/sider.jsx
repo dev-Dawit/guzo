@@ -11,9 +11,7 @@ export const SiderSection = () => {
 
     const [collapsed, setCollapsed] = useState(false);
 
-    const {
-           token: { colorBgContainer },
-         } = theme.useToken();
+    
   
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
@@ -42,6 +40,9 @@ export const SiderSection = () => {
         <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed} style={{ background: '#f0f2f5',}}>
           <div className="logo" />
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+            <Menu.Item key="1" icon={<HomeOutlined />}>
+              <Link to='/'>Home</Link>
+            </Menu.Item>
             <Menu.Item key="1" icon={<HomeOutlined />}>
               <Link to='/'>Dashboard</Link>
             </Menu.Item>

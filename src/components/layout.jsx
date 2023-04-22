@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout,} from 'antd';
 
-import { HeaderSection } from './header/header';
+import { HeaderSection }  from './header/header';
 import { SiderSection } from './sider/sider';
 import { FooterSection } from './footer/footer';
 import { ContentSection } from './content/content';
@@ -13,11 +13,11 @@ const Theme = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      < HeaderSection />
+      <HeaderSection />
       <Layout>
         < SiderSection />
-        <Layout style={{ padding: '0 24px 0px' }}>
-          <BreadCrumbSection style={{ margin: '16px 0' }} />
+        <Layout style={{ padding: '0 24px 0px', height: 'calc(100vh - 64px)', overflowX: 'auto'  }}>
+          <BreadCrumbSection style={{ margin: '15px 0' }} />
           < ContentSection />
           < FooterSection />
         </Layout>

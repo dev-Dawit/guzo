@@ -7,11 +7,17 @@ import { Account } from "../account/account";
 
 export const Nav = () => {
     return (
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="horizontal" style={{display: 'flex'}}>
-          <Menu.Item key="1" icon={<HomeOutlined />}>
-            Home
-          </Menu.Item>
-          <Account/>  
-        </Menu>
+      <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-between'}}>
+        <div style={{marginRight: '20px'}} >
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="horizontal" style={{display: 'flex'}}>
+            <Menu.Item key="1" icon={ <HomeOutlined /> }  > 
+              Home
+            </Menu.Item>
+          </Menu>
+        </div>
+        <div style={{marginLeft: 'auto'}}>
+          <Account/>
+        </div> 
+      </div>
     );
 };

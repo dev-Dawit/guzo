@@ -1,0 +1,28 @@
+.tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+  }
+  
+  .tab {
+    margin-right: 1rem;
+  }
+
+  .tab > a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #333; /* Add a border to the tab box */
+    border-radius: 0.25rem; /* Round the corners of the tab box */
+  }
+  
+  .tab > a.active {
+    font-weight: bold;
+    border-color: #333; /* Change the border color of the active tab box */
+    background-color: #f0f0f0; /* Add a background color to the active tab box */
+  }
+
+  

@@ -7,8 +7,9 @@ import { Nav } from '../nav/nav';
 const { Header, } = Layout;
 
 export const HeaderSection = () => {
-    <Header >
-        <div />   {/* logo goes here*/}
-        <Nav />
-    </Header>
+    return(
+        <Header >
+            <Nav />
+        </Header>
+    )
 }

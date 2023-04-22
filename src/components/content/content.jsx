@@ -23,7 +23,9 @@ export const ContentSection = () => {
             padding: 24,
             margin: 0,
             minHeight: 500,
-            background: 'grey',
+            background: '#D3D3D3',
+            height: 'calc(100vh - 64px)', 
+            overflowX: 'auto'
         }}
     >
         <Routes>
