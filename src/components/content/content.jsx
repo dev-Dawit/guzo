@@ -9,7 +9,7 @@ import Finance from '../../routes/menu/finance/finance';
 import LookUp from '../../routes/menu/lookUp/lookUp';
 import Passenger from '../../routes/menu/passenger/passenger';
 import Report from '../../routes/menu/report/report';
-import Transporter from '../../routes/menu/transporter/transporter';
+import Agents from '../../routes/menu/agents/agents';
 import Trip from '../../routes/menu/trip/trip';
 import UserAdmin from '../../routes/menu/userAdmin/userAdmin';
 
@@ -32,7 +32,7 @@ export const ContentSection = () => {
             <Route path='/' element={<Home />}/>
             <Route path='/destination' element={<Destination />}/>
             <Route path='/trip' element={<Trip />}/>
-            <Route path='/transporter' element={<Transporter />}/>
+            <Route path='/agents' element={<Agents />}/>
             <Route path='/passenger' element={<Passenger />}/>
             <Route path='/finance' element={<Finance />}/>
             <Route path='/report' element={<Report />}/>

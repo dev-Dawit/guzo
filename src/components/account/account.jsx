@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Menu,  Dropdown, Avatar } from 'antd';
+import { Menu,  Dropdown,  Avatar } from 'antd';
 import { UserOutlined, } from '@ant-design/icons';
+
 
 export const Account = () => {
     const [loggedIn, setLoggedIn] = useState(true); // change to false if user is not logged in
@@ -26,7 +27,7 @@ export const Account = () => {
     );
   
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+      <div style={{ margin: 'auto' }}>
         <div style={{ position: 'relative', justifyContent: 'flex-end'}}>
           <Dropdown overlay={profileMenu} trigger={['click']}>
             <Avatar

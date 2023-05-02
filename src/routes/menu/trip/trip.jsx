@@ -6,10 +6,24 @@ import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import TableComponent from "../../../components/table/table";
 
 import {
-  ExportOutlined,
+  FolderOpenOutlined,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import TabComponent from "../../../components/tabs/tab";
+
+const items = [
+  {
+    key: '1',
+    label: `Active Trips`,
+    // children: `Content of Tab Pane 1`,
+  },
+  {
+    key: '2',
+    label: `Archived Trips`,
+    // children: `Content of Tab Pane 2`,
+  },
+];
 
 const columns = [
   {
@@ -52,7 +66,7 @@ const columns = [
     filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
-          placeholder="Search phone no."
+          placeholder="Search Destinations"
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
@@ -145,7 +159,7 @@ const columns = [
     filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
-          placeholder="Search departureDate"
+          placeholder="Search Date of Departure"
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
@@ -176,7 +190,7 @@ const columns = [
     filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
-          placeholder="Search registration date"
+          placeholder="Search arrival date"
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
@@ -199,12 +213,74 @@ const columns = [
     filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
   },
   {
+    title: 'መነሻ ቦታ',
+    dataIndex: 'placeOfDeparture',
+    sorter: (a, b) => a.placeOfDeparture.localeCompare(b.placeOfDeparture),
+    sortDirections: ['ascend', 'descend'],
+    width: '18%',
+    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          placeholder="Search Place of Departure"
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => confirm()}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type="primary"
+          onClick={() => confirm()}
+          icon={<SearchOutlined />}
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+        Search
+        </Button>
+        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+          Reset
+        </Button>
+      </div>
+    ),
+    onFilter: (value, record) => record.placeOfDeparture.toLowerCase().includes(value.toLowerCase()),
+    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+  },
+  {
+    title: 'ጥቅል',
+    dataIndex: 'packages',
+    sorter: (a, b) => a.packages.localeCompare(b.packages),
+    sortDirections: ['ascend', 'descend'],
+    width: '18%',
+    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          placeholder="Search Packages"
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => confirm()}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type="primary"
+          onClick={() => confirm()}
+          icon={<SearchOutlined />}
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+        Search
+        </Button>
+        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+          Reset
+        </Button>
+      </div>
+    ),
+    onFilter: (value, record) => record.packages.toLowerCase().includes(value.toLowerCase()),
+    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+  },
+  {
     title: 'Action',
     dataIndex: 'action',
     width: '18%',
     render: (_, record) => (
     <span>
-    <Button type="link" icon={<ExportOutlined />} onClick={() => handleDetail(record)}></Button>
+    <Button type="link" icon={<FolderOpenOutlined />} onClick={() => handleDetail(record)}></Button>
     <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}></Button>
     </span>
     ),
@@ -316,6 +392,7 @@ const data = [
 const Trip = () => {
     return (
       <div>
+        <TabComponent items={items}/>
         <TableComponent title ={'Trips'} columns={columns} dataSource={data} />
       </div>
     )

@@ -29,7 +29,7 @@ export const SiderSection = () => {
       </div>
     );
   
-    const TransporterIcon = () => (
+    const AgentsIcon = () => (
       <div style={{ fontSize: '24px' }}>
         <CarOutlined style={{ marginRight: '10px', marginBottom: '17px' }} />
       </div>
@@ -52,8 +52,8 @@ export const SiderSection = () => {
             <Menu.Item key="3" icon={<TripIcon />}>
                 <Link to='/trip'>Trip</Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<TransporterIcon />}>
-                <Link to='/transporter'>Transporter</Link>
+            <Menu.Item key="4" icon={<AgentsIcon />}>
+                <Link to='/agents'>Agents</Link>
             </Menu.Item>
             <Menu.Item key="5" icon={<UserOutlined />}>
                 <Link to='/passenger'>Passenger</Link>

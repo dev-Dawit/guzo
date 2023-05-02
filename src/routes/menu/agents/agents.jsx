@@ -7,7 +7,7 @@ import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import TableComponent from "../../../components/table/table";
 
 import {
-  ExportOutlined,
+  FolderOpenOutlined,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
@@ -205,7 +205,7 @@ const columns = [
     width: '18%',
     render: (_, record) => (
     <span>
-    <Button type="link" icon={<ExportOutlined />} onClick={() => handleDetail(record)}></Button>
+    <Button type="link" icon={<FolderOpenOutlined />} onClick={() => handleDetail(record)}></Button>
     <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}></Button>
     </span>
     ),
@@ -313,15 +313,15 @@ const data = [
   },
 ];
 
-const Transporter = () => {
+const Agents = () => {
     return (
       <div>
-        <TableComponent title ={'Transporters'} columns={columns} dataSource={data} />
+        <TableComponent title ={'Agents'} columns={columns} dataSource={data} />
       </div>
     )
   }
   
-  export default Transporter
+  export default Agents;
 
 
 
