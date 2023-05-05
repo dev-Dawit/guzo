@@ -11,6 +11,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import AddNewAgentModal from "../../../components/modals/addNewAgent.component";
 
 const columns = [
   {
@@ -316,7 +317,7 @@ const data = [
 const Agents = () => {
     return (
       <div>
-        <TableComponent title ={'Agents'} columns={columns} dataSource={data} />
+        <TableComponent title ={'Agents'} columns={columns} dataSource={data} modal={AddNewAgentModal} />
       </div>
     )
   }

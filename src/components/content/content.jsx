@@ -12,6 +12,7 @@ import Report from '../../routes/menu/report/report';
 import Agents from '../../routes/menu/agents/agents';
 import Trip from '../../routes/menu/trip/trip';
 import UserAdmin from '../../routes/menu/userAdmin/userAdmin';
+import Nigs from '../../routes/menu/nigs/nigs.component';
 
 const { Content,} = Layout;
 
@@ -39,6 +40,7 @@ export const ContentSection = () => {
             <Route path='/userAdmin' element={<UserAdmin />}/>
             <Route path='/accessControl' element={<AccessControl />}/>
             <Route path='/lookUp' element={<LookUp />}/>
+            <Route path='/nigs' element={<Nigs />}/>
         </Routes>
     </Content>
   )

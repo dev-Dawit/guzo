@@ -1,6 +1,6 @@
 import React, { useState }from 'react'
 import { Layout, Menu, theme, } from 'antd';
-import { HomeOutlined, UserOutlined, SettingOutlined, EnvironmentOutlined, 
+import { HomeOutlined, UserOutlined, SettingOutlined, EnvironmentOutlined, BulbOutlined,
     CarOutlined, DollarOutlined, FileOutlined, LockOutlined, SearchOutlined,
     LogoutOutlined } from '@ant-design/icons';
 
@@ -35,6 +35,13 @@ export const SiderSection = () => {
       </div>
     );
 
+    const NigsIcon = () => (
+      <div>
+          <BulbOutlined style={{ marginRight: '10px' }} />
+        </div>
+    )
+   
+
 
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed} style={{ background: '#f0f2f5',}}>
@@ -54,6 +61,9 @@ export const SiderSection = () => {
             </Menu.Item>
             <Menu.Item key="4" icon={<AgentsIcon />}>
                 <Link to='/agents'>Agents</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<NigsIcon />}>
+                <Link to='/nigs'>Nigs</Link>
             </Menu.Item>
             <Menu.Item key="5" icon={<UserOutlined />}>
                 <Link to='/passenger'>Passenger</Link>

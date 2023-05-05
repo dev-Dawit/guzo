@@ -11,6 +11,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import TabComponent from "../../../components/tabs/tab";
+import AddNewTripModal from "../../../components/modals/addNewTrip.component";
 
 const items = [
   {
@@ -21,6 +22,11 @@ const items = [
   {
     key: '2',
     label: `Archived Trips`,
+    // children: `Content of Tab Pane 2`,
+  },
+  {
+    key: '3',
+    label: `Recurring Trips`,
     // children: `Content of Tab Pane 2`,
   },
 ];
@@ -393,7 +399,7 @@ const Trip = () => {
     return (
       <div>
         <TabComponent items={items}/>
-        <TableComponent title ={'Trips'} columns={columns} dataSource={data} />
+        <TableComponent title ={'Trips'} columns={columns} dataSource={data} modal={AddNewTripModal} />
       </div>
     )
   }
