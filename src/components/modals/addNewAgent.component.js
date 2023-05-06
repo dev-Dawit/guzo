@@ -44,6 +44,13 @@ const AddNewAgentModal = ({ visible, onCancel, onCreate }) => {
         >
           <Input type="number" />
         </Form.Item>
+        <Form.Item
+          name="nameOfChurch"
+          label="አጥብያ ቤተክርስቲያን"
+          rules={[{ required: true, }]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Modal>
   );

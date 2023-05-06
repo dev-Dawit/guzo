@@ -274,6 +274,7 @@ import { useState } from 'react';
 import { Modal, Form, Input, DatePicker, Select, Checkbox } from 'antd';
 
 const destinations = ['ደብረ ሊባኖስ', 'ላሊበላ', 'አክሱም ጽዮን']
+const agents = ['ማህበረ ቅዱሳን', 'ፍኖተ ጽድቅ', 'ግቢ ጉባኤ']
 
 const { Option } = Select;
 
@@ -346,17 +347,10 @@ const AddNewTripModal = ({ visible, onCreate, onCancel }) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name="nameOfAgent"
-          label="Name of Agent"
-          rules={[
-            {
-              required: true,
-              message: 'Please input the name of Agent!',
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item name="agent" label="Name of Agent" rules={[{ required: true, message: 'Please select an agent!' }]}>
+          <Select placeholder="Select a destination">
+            {agents.map(agent => <Option value={agent} key={agent}>{agent}</Option>)}
+          </Select>
         </Form.Item>
         <Form.Item
           name="price"
