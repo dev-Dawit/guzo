@@ -25,7 +25,8 @@ const TableComponent = ({ title, dataSource, columns, modal: ModalComponent }) =
   };
 
   return (
-    <div style={{ height: '100vh', paddingTop: '0px', marginTop: '0px'}}>
+    <div style={{overflowY: 'auto'}}>
+    <div  style={{ position: 'sticky', top: 0, zIndex: 1 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1 style={{ fontSize: '1.5rem' }}>{title}</h1>
         <div style={{ display: 'flex' }}>
@@ -41,10 +42,10 @@ const TableComponent = ({ title, dataSource, columns, modal: ModalComponent }) =
         </div>
       </div>
       <Table
-          style={{ width: '100%', overflowX: 'auto' }}
+          style={{flex: 1, overflowY: 'auto', overflowX: 'auto'}}
           columns={columns}
           dataSource={dataSource}
-          pagination={{ pageSize: 10 }}
+          pagination={{ pageSize: 5 }}
           scroll={{ y: 'calc(100vh - 190px)' }}
           title={() => {return title}}
         />
@@ -55,7 +56,7 @@ const TableComponent = ({ title, dataSource, columns, modal: ModalComponent }) =
           onCancel={handleCancel}
         />
       </div>
-    
+      </div>
   );
 };
 

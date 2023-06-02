@@ -13,6 +13,8 @@ import Agents from '../../routes/menu/agents/agents';
 import Trip from '../../routes/menu/trip/trip';
 import UserAdmin from '../../routes/menu/userAdmin/userAdmin';
 import Nigs from '../../routes/menu/nigs/nigs.component';
+import Marketing from '../../routes/menu/marketing/marketing.component';
+import Kdusan from '../../routes/menu/kdusan/kdusan.component';
 
 const { Content,} = Layout;
 
@@ -23,9 +25,9 @@ export const ContentSection = () => {
         style={{
             padding: 24,
             margin: 0,
-            minHeight: 500,
+            minHeight: '30%',
             background: '#D3D3D3',
-            height: 'calc(100vh - 64px)', 
+            height: 'calc(100vh - 8vh)', 
             overflowX: 'auto'
         }}
     >
@@ -36,11 +38,13 @@ export const ContentSection = () => {
             <Route path='/agents' element={<Agents />}/>
             <Route path='/passenger' element={<Passenger />}/>
             <Route path='/finance' element={<Finance />}/>
+            <Route path='/marketing' element={<Marketing />}/>
             <Route path='/report' element={<Report />}/>
             <Route path='/userAdmin' element={<UserAdmin />}/>
             <Route path='/accessControl' element={<AccessControl />}/>
             <Route path='/lookUp' element={<LookUp />}/>
             <Route path='/nigs' element={<Nigs />}/>
+            <Route path='/kdusan' element={<Kdusan />}/>
         </Routes>
     </Content>
   )

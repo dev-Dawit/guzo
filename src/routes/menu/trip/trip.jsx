@@ -2,6 +2,7 @@ import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 
 import { Table, Button, Modal, Form, Input, Upload, message } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import TableComponent from "../../../components/table/table";
 
@@ -12,26 +13,15 @@ import {
 } from "@ant-design/icons";
 import TabComponent from "../../../components/tabs/tab";
 import AddNewTripModal from "../../../components/modals/addNewTrip.component";
+import TagChip from "../../../components/tagChip/tagChip.component";
 
-const items = [
-  {
-    key: '1',
-    label: `Active Trips`,
-    // children: `Content of Tab Pane 1`,
-  },
-  {
-    key: '2',
-    label: `Archived Trips`,
-    // children: `Content of Tab Pane 2`,
-  },
-  {
-    key: '3',
-    label: `Recurring Trips`,
-    // children: `Content of Tab Pane 2`,
-  },
-];
+const renderTags = (tags) => {
+  return tags.map((tag) => (
+    <TagChip key={tag.id} name={tag.name} description={tag.description} />
+  ));
+}
 
-const columns = [
+const tripTablecolumns = [
   {
     title: 'የጉዞው ስም',
     dataIndex: 'name',
@@ -249,16 +239,31 @@ const columns = [
     onFilter: (value, record) => record.placeOfDeparture.toLowerCase().includes(value.toLowerCase()),
     filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
   },
+  { title: 'Tags', dataIndex: 'tags', key: 'tags', render: renderTags },
   {
-    title: 'ጥቅል',
-    dataIndex: 'packages',
-    sorter: (a, b) => a.packages.localeCompare(b.packages),
+    title: 'Action',
+    dataIndex: 'action',
+    width: '18%',
+    render: (_, record) => (
+    <span>
+    <Button type="link" icon={<OpenInNewIcon fontSize="small" />} onClick={() => handleDetail(record)}></Button>
+    <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}></Button>
+    </span>
+    ),
+  },
+];
+
+const tagTableColumns = [
+  {
+    title: 'name',
+    dataIndex: 'name',
+    sorter: (a, b) => a.name.localeCompare(b.name),
     sortDirections: ['ascend', 'descend'],
     width: '18%',
     filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
-          placeholder="Search Packages"
+          placeholder="Search name"
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
@@ -270,16 +275,48 @@ const columns = [
           size="small"
           style={{ width: 90, marginRight: 8 }}
         >
-        Search
+          Search
         </Button>
         <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
           Reset
         </Button>
       </div>
     ),
-    onFilter: (value, record) => record.packages.toLowerCase().includes(value.toLowerCase()),
+    onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
     filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
   },
+  {
+    title: 'description',
+    dataIndex: 'description',
+    sorter: (a, b) => a.description.localeCompare(b.description),
+    sortDirections: ['ascend', 'descend'],
+    width: '18%',
+    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          placeholder="Search description"
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => confirm()}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type="primary"
+          onClick={() => confirm()}
+          icon={<SearchOutlined />}
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+          Search
+        </Button>
+        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+          Reset
+        </Button>
+      </div>
+    ),
+    onFilter: (value, record) => record.description.toLowerCase().includes(value.toLowerCase()),
+    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+  },
+  
   {
     title: 'Action',
     dataIndex: 'action',
@@ -292,6 +329,8 @@ const columns = [
     ),
   },
 ];
+
+
 
 const handleDetail = (record) => {
   console.log('Detail', record);
@@ -310,7 +349,7 @@ const handleSearch = (value) => {
   console.log('Search', value);
 };
 
-const data = [
+const tripTabledata = [
   {
     key: '01',
     name: 'ልዩ የገና ጉዞ',
@@ -319,6 +358,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -328,6 +373,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -337,6 +388,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -346,6 +403,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -355,6 +418,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -364,6 +433,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -373,6 +448,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -382,6 +463,12 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
   {
     key: '01',
@@ -391,17 +478,59 @@ const data = [
     price: '500.00',
     departureDate: '02/01/2023',
     arrivalDate: '01/03/2023',
+    placeOfDeparture: '5 ኪሎ ቅድስት ማርያም',
+    tags: [
+      { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+      { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+      { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+    ]
   },
 ];
 
+const tagTableData = [
+  {
+    key: '01',
+    name: '9ኙ አበይት በዓላት ',
+    description: 'ልደተ ክርስቶስ፤ ግዝረት፤ ጥምቀት፤ ስቅለት፤ ትንሳኤ፤ እርገት፤  '
+  },
+  
+]
+
+const tabs = [
+  {
+    key: '1',
+    title: 'በመካሄድ ላይ ያሉ ጉዞዎች',
+    content: <div>
+      <TableComponent title = {'Trips'} columns={tripTablecolumns} dataSource={tripTabledata} modal={AddNewTripModal} />
+    </div>,
+  },
+  {
+    key: '2',
+    title: 'የተካሄዱ ጉዞዎች',
+    content: <div>
+      <TableComponent title = {'Trips'} columns={tripTablecolumns} dataSource={tripTabledata} modal={AddNewTripModal} />
+    </div>,
+  },
+  {
+    key: '3',
+    title: 'የሚደጋገሙ ጉዞዎች',
+    content: <div>
+      <TableComponent title = {'Trips'} columns={tripTablecolumns} dataSource={tripTabledata} modal={AddNewTripModal} />
+    </div>,
+  },
+  {
+    key: '4',
+    title: 'Tag',
+    content: <div>  
+        <TableComponent title = {'Trips'} columns={tagTableColumns} dataSource={tagTableData} modal={AddNewTripModal} />
+    </div>,
+  },
+];
 
 const Trip = () => {
-    return (
-      <div>
-        <TabComponent items={items}/>
-        <TableComponent title ={'Trips'} columns={columns} dataSource={data} modal={AddNewTripModal} />
-      </div>
-    )
+  return (
+    <TabComponent tabs={tabs}/>
+)
   }
   
   export default Trip

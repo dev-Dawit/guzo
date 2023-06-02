@@ -16,7 +16,7 @@ const Theme = () => {
       <HeaderSection />
       <Layout>
         < SiderSection />
-        <Layout style={{ padding: '0 24px 0px', height: 'calc(100vh - 64px)', overflowX: 'auto'  }}>
+        <Layout style={{ padding: '0 24px 0px', height: 'calc(100vh - 8vh)', overflowX: 'auto'  }}>
           <BreadCrumbSection style={{ margin: '15px 0' }} />
           < ContentSection />
           < FooterSection />
