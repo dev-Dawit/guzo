@@ -1,5 +1,5 @@
 
-import React from 'react';
+import {useState} from 'react';
 import { Space } from 'antd';
 import { Table, Button, Modal, Form, Input, Upload, message } from 'antd';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -16,144 +16,10 @@ import {
 import TabComponent from '../../../components/tabs/tab';
 import AddNewDestinationModal from '../../../components/modals/addNewDestinationModal.component';
 
+import { EditIcon } from '../../../components/actionIcons/edit/editIcon.component';
+import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
+
 const itemsPerPage = 10;
-const destinationTableColumns = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    sorter: (a, b) => a.id.localeCompare(b.id),
-    sortDirections: ['ascend', 'descend'],
-    width: '10%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search id"
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.id.toLowerCase().includes(value.toLowerCase()),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'Name Of Destination',
-    dataIndex: 'nameOfDestination',
-    sorter: (a, b) => a.nameOfDestination - b.nameOfDestination,
-    sortDirections: ['ascend', 'descend'],
-    width: '20%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search phone no."
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.nameOfDestination === parseInt(value),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'Location',
-    dataIndex: 'location',
-    sorter: (a, b) => a.location.localeCompare(b.location),
-    sortDirections: ['ascend', 'descend'],
-    width: '18%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search location"
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-        Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.location.toLowerCase().includes(value.toLowerCase()),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'tags',
-    dataIndex: 'tags',
-    sorter: (a, b) => a.tags.localeCompare(b.tags),
-    sortDirections: ['ascend', 'descend'],
-    width: '18%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search tags"
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.tags.toLowerCase().includes(value.toLowerCase()),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    width: '18%',
-    render: (_, record) => (
-    <span>
-    <Button type="link" icon={<OpenInNewIcon fontSize="small" />} onClick={() => handleDetail(record)}></Button>
-    <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}></Button>
-    </span>
-    ),
-  },
-];
 
 const tagTableColumns = [
   {
@@ -343,27 +209,244 @@ const handleSearch = (value) => {
   console.log('Search', value);
 };
 
-const tabs = [
-  {
-    key: '1',
-    title: 'የመዳረሻዎች ዝርዝር',
-    content: <div>
-      <TableComponent title = {'Destinations'} columns={destinationTableColumns} dataSource={destinationTableData} itemsPerPage= {itemsPerPage} modal={AddNewDestinationModal} />
-    </div>,
-  },
-  {
-    key: '2',
-    title: 'Tag',
-    content: <div>  
-        <TableComponent columns={tagTableColumns} dataSource={tagTableData} modal={AddNewDestinationModal} />
-    </div>,
-  },
-];
+const Destination = (data, columns, onSave) => {
+  const [selectedDestination, setSelectedDestination] = useState(null)
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [form] = Form.useForm();
 
-const Destination = () => {
+  const handleEditClick = () => {
+    setEditModalVisible(true);
+  };
+
+  const handleDetailClick = (destination) => {
+    setSelectedDestination(destination);
+    setDetailModalVisible(true);
+  };
+
+
+  const handleEditModalClose = () => {
+    setEditModalVisible(false);
+  };
+
+  const handleDetailModalClose = () => {
+    setDetailModalVisible(false);
+  };
+
+  const handleSave = () => {
+    form.validateFields().then((values) => {
+      form.resetFields();
+      onSave(values);
+    });
+  }
+
+  const destinationTableColumns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      sorter: (a, b) => a.id.localeCompare(b.id),
+      sortDirections: ['ascend', 'descend'],
+      width: '10%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search id"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.id.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    },
+    {
+      title: 'Name Of Destination',
+      dataIndex: 'nameOfDestination',
+      sorter: (a, b) => a.nameOfDestination - b.nameOfDestination,
+      sortDirections: ['ascend', 'descend'],
+      width: '20%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search phone no."
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.nameOfDestination === parseInt(value),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      sorter: (a, b) => a.location.localeCompare(b.location),
+      sortDirections: ['ascend', 'descend'],
+      width: '18%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search location"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+          Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.location.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+
+    },
+    {
+      title: 'tags',
+      dataIndex: 'tags',
+      sorter: (a, b) => a.tags.localeCompare(b.tags),
+      sortDirections: ['ascend', 'descend'],
+      width: '18%',
+      
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search tags"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.tags.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+      
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      width: '18%',
+      render: (_, record) => (
+      <span>
+        <DetailIcon onClick={handleDetailClick} />
+        <EditIcon onClick={handleEditClick} />
+      </span>
+      ),
+    },
+  ];
+  
+  const tabs = [
+    {
+      key: '1',
+      title: 'የመዳረሻዎች ዝርዝር',
+      content: <div>
+        <TableComponent title = {'Destinations'} columns={destinationTableColumns} dataSource={destinationTableData} itemsPerPage= {itemsPerPage} modal={AddNewDestinationModal} />
+      </div>,
+    },
+    {
+      key: '2',
+      title: 'Tag',
+      content: <div>  
+          <TableComponent columns={tagTableColumns} dataSource={tagTableData} modal={AddNewDestinationModal} />
+      </div>,
+    },
+  ];
+  
   return (
-    <TabComponent tabs={tabs}/>
+    <div>
+        <TabComponent tabs={tabs}/>
+        <Modal
+        title="Edit Destination information"
+        visible={editModalVisible}
+        onCancel={handleEditModalClose}
+        /* Other modal props and content */
+        >
+          <Form form={form}>
+          <Form.Item
+            name="nameOfDestination"
+            label="የመዳረሻ ስም"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="addressOfDestination"
+            label="የመዳረሻ አድራሻ"
+          >
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        visible={detailModalVisible}
+        onCancel={handleDetailModalClose}
+        title="Destination Details"
+        footer={null}
+      >
+      {selectedDestination && (
+          <div>
+          {destinationTableColumns.map((column) => {
+            if (column.dataIndex !== 'action') {
+              return(
+                <p key={column.dataIndex}>
+                  {column.title}: {selectedDestination[column.dataIndex]}
+                </p>
+              )
+            }  
+          })
+          }
+          </div>
+        )}
+      </Modal>
+    </div>     
   )
+  
 }
 
 export default Destination;

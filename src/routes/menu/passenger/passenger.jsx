@@ -22,82 +22,8 @@ const handleEdit = (record) => {
 };
 
 
-const data = [
-  {
-    key: '01',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '02',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '03',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '04',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '05',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '06',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '07',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '08',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-  {
-    key: '09',
-    name: 'ሃብቶም ወ/አብ',
-    phoneNo: '0910237390',
-    email: 'habtom@gamil.com',
-    gender: 'Male',
-    dob: '12/11/2023',
-  },
-];
-
-const Passenger = ({onSave }) => {
+const Passenger = (data, columns, onSave) => {
+  const [selectedPassenger, setselectedPassenger] = useState(null)
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [form] = Form.useForm();
@@ -106,7 +32,8 @@ const Passenger = ({onSave }) => {
     setEditModalVisible(true);
   };
 
-  const handleDetailClick = () => {
+  const handleDetailClick = (destination) => {
+    setselectedPassenger(destination);
     setDetailModalVisible(true);
   };
 
@@ -124,7 +51,7 @@ const Passenger = ({onSave }) => {
       onSave(values);
     });
   }
-  const columns = [
+  const passengerTableColumns = [
     {
       title: 'name',
       dataIndex: 'name',
@@ -212,58 +139,131 @@ const Passenger = ({onSave }) => {
     },
   ];
   
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <TableComponent title ={'Passenger'} columns={columns} dataSource={data} modal={AddNewPassenger} />
-        <Modal
-          title="Edit Passenger information"
-          visible={editModalVisible}
-          onCancel={handleEditModalClose}
-          /* Other modal props and content */
-          >
-          <Form form={form}>
-        <Form.Item
-          name="name"
-          label="ስም"
-          rules={[{ required: true, message: 'ስም' }]}
-        >
-          <Input />
-        </Form.Item>
+  const passengerTableData = [
+    {
+      key: '01',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '02',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '03',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '04',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '05',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '06',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '07',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '08',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+    {
+      key: '09',
+      name: 'ሃብቶም ወ/አብ',
+      phoneNo: '0910237390',
+      email: 'habtom@gamil.com',
+      gender: 'Male',
+      dob: '12/11/2023',
+    },
+  ];
 
-        <Form.Item
-          name="otherDestinations"
-          label="የጎበኙአቸው መዳረሻዎች"
-          rules={[{ required: true, message: 'መዳረሻ' }]}
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <TableComponent title ={'Passenger'} columns={passengerTableColumns} dataSource={passengerTableData} modal={AddNewPassenger} />
+      <Modal
+        title="Edit Passenger information"
+        visible={editModalVisible}
+        onCancel={handleEditModalClose}
+        /* Other modal props and content */
         >
-          <Select mode="tags" style={{ width: '100%' }} placeholder="መዳረሻዎች ይምረጡ" />
-        </Form.Item>
+        <Form form={form}>
+      <Form.Item
+        name="name"
+        label="ስም"
+        rules={[{ required: true, message: 'ስም' }]}
+      >
+        <Input />
+      </Form.Item>
 
-        <Form.Item
-          name="trips"
-          label="የተሳተፉባቸው ጉዞዎች"
-          rules={[{ required: true, message: 'ጉዞዎች' }]}
-        >
-          <Select mode="tags" style={{ width: '100%' }} placeholder="ጉዞዎች ይምረጡ" />
-        </Form.Item>
+      <Form.Item
+        name="email"
+        label="email"
+        rules={[{ required: true, message: 'መዳረሻ' }]}
+      >
+        <Input />
+      </Form.Item>
+    </Form>
+      </Modal>
 
-        <Form.Item
-          name="tripAdvisors"
-          label="የተጓጓዙባቸው ማህበራት"
-          rules={[{ required: true, message: 'ማህበራት ይምረጡ' }]}
-        >
-          <Select mode="tags" style={{ width: '100%' }} placeholder="ማህበራት ይምረጡ" />
-        </Form.Item>
-      </Form>
-        </Modal>
-        <Modal
-          title="Passenger Details"
-          visible={detailModalVisible}
-          onCancel={handleDetailModalClose}
-          /* Other modal props and content */
-        >
-          {/* Detail modal content */}
-        </Modal>
-      </div>
+      <Modal
+        visible={detailModalVisible}
+        onCancel={handleDetailModalClose}
+        title="Passenger Details"
+        footer={null}
+      >
+      {selectedPassenger && (
+          <div>
+          {passengerTableColumns.map((column) => {
+            if (column.dataIndex !== 'action') {
+              return(
+                <p key={column.dataIndex}>
+                  {column.title}: {selectedPassenger[column.dataIndex]}
+                </p>
+              )
+            }  
+          })
+          }
+          </div>
+        )}
+      </Modal>
+    </div>
     )
   }
   

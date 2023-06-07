@@ -28,7 +28,8 @@ export const ContentSection = () => {
             minHeight: '30%',
             background: '#D3D3D3',
             height: 'calc(100vh - 8vh)', 
-            overflowX: 'auto'
+            overflowX: 'auto',
+            overflowY: 'auto'
         }}
     >
         <Routes>
