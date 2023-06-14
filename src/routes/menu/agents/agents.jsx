@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 
-import { Table, Button, Modal, Form, Input, DatePicker, Upload, message } from 'antd';
+import { Table, Button, Modal, Form, Input, DatePicker, Upload, message, Descriptions } from 'antd';
 import { PlusOutlined, SearchOutlined, } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
@@ -57,7 +57,7 @@ const Agents = (data, columns,onSave) => {
     const handleDetailModalClose = () => {
       setDetailModalVisible(false);
     };
-  
+
     const handleSave = () => {
       form.validateFields().then((values) => {
         form.resetFields();
@@ -352,6 +352,7 @@ const Agents = (data, columns,onSave) => {
     return (
       <div>
         <TableComponent title ={'Agents'} columns={agentTableColumns} dataSource={agentTableData} modal={AddNewAgentModal} />
+      
         <Modal
         title="Edit Agent information"
         visible={editModalVisible}
@@ -398,9 +399,9 @@ const Agents = (data, columns,onSave) => {
             {agentTableColumns.map((column) => {
               if (column.dataIndex !== 'action') {
                 return(
-                  <p key={column.dataIndex}>
-                    {column.title}: {selectedAgent[column.dataIndex]}
-                  </p>
+                  <Descriptions>
+                    <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedAgent[column.dataIndex]}</Descriptions.Item>
+                  </Descriptions>
                 )
               }  
             })

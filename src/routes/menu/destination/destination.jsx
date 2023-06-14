@@ -1,7 +1,7 @@
 
 import {useState} from 'react';
 import { Space } from 'antd';
-import { Table, Button, Modal, Form, Input, Upload, message } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, message, Descriptions } from 'antd';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
@@ -434,9 +434,9 @@ const Destination = (data, columns, onSave) => {
           {destinationTableColumns.map((column) => {
             if (column.dataIndex !== 'action') {
               return(
-                <p key={column.dataIndex}>
-                  {column.title}: {selectedDestination[column.dataIndex]}
-                </p>
+                <Descriptions>
+                  <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedDestination[column.dataIndex]}</Descriptions.Item>
+                </Descriptions>
               )
             }  
           })

@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { Table, Button, Modal, Form, Input, Upload, message } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import GlobalSearchComponent from '../global search/globalSearch.component';
+import GlobalSearch from '../global search/globalSearch.component';
 
 const { Search } = Input;
 const { Column } = Table;
@@ -31,12 +33,6 @@ const TableComponent = ({ title, dataSource, columns, modal: ModalComponent }) =
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1 style={{ fontSize: '1.5rem' }}>{title}</h1>
         <div style={{ display: 'flex' }}>
-          <Search
-            placeholder="Search"
-            allowClear
-            onSearch={(value) => console.log(value)}
-            style={{ marginRight: '1rem' }}
-          />
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             {title}
           </Button>

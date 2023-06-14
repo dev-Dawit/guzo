@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 import TableComponent from "../../../components/table/table"
 
-import { Table, Button, Modal, Form, Input, Upload, message, Select, DatePicker } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, message, Select, DatePicker, Descriptions } from 'antd';
 
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -438,9 +438,9 @@ const Nigs = (data, columns,onSave) => {
             {nigsTableColumns.map((column) => {
               if (column.dataIndex !== 'action') {
                 return(
-                  <p key={column.dataIndex}>
-                    {column.title}: {selectedNigs[column.dataIndex]}
-                  </p>
+                  <Descriptions>
+                    <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedNigs[column.dataIndex]}</Descriptions.Item>
+                  </Descriptions>
                 )
               }  
             })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal, Form, Input, Upload, message, Select } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, message, Select, Descriptions  } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
@@ -11,6 +11,7 @@ import TableComponent from "../../../components/table/table";
 import AddNewPassenger from '../../../components/modals/addNewPassenger';
 import { EditIcon } from '../../../components/actionIcons/edit/editIcon.component';
 import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
+import GlobalSearch from '../../../components/global search/globalSearch.component';
 
 
 const handleDetail = (record) => {
@@ -216,7 +217,11 @@ const Passenger = (data, columns, onSave) => {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div>
+      <GlobalSearch style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'right' }}/>
       <TableComponent title ={'Passenger'} columns={passengerTableColumns} dataSource={passengerTableData} modal={AddNewPassenger} />
+      </div>
+      
       <Modal
         title="Edit Passenger information"
         visible={editModalVisible}
@@ -253,9 +258,9 @@ const Passenger = (data, columns, onSave) => {
           {passengerTableColumns.map((column) => {
             if (column.dataIndex !== 'action') {
               return(
-                <p key={column.dataIndex}>
-                  {column.title}: {selectedPassenger[column.dataIndex]}
-                </p>
+                <Descriptions>
+                  <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedPassenger[column.dataIndex]}</Descriptions.Item>
+                </Descriptions>
               )
             }  
           })
