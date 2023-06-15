@@ -21,193 +21,9 @@ import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIco
 
 const itemsPerPage = 10;
 
-const tagTableColumns = [
-  {
-    title: 'name',
-    dataIndex: 'name',
-    sorter: (a, b) => a.name.localeCompare(b.name),
-    sortDirections: ['ascend', 'descend'],
-    width: '18%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search name"
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'description',
-    dataIndex: 'description',
-    sorter: (a, b) => a.description.localeCompare(b.description),
-    sortDirections: ['ascend', 'descend'],
-    width: '18%',
-    filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder="Search description"
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => confirm()}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => confirm()}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) => record.description.toLowerCase().includes(value.toLowerCase()),
-    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-  },
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    width: '18%',
-    render: (_, record) => (
-    <span>
-    <Button type="link" icon={<FolderOpenOutlined />} onClick={() => handleDetail(record)}></Button>
-    <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}></Button>
-    </span>
-    ),
-  },
-];
 
-const destinationTableData = [
-  {
-    key: "01",
-    id: "001",
-    nameOfDestination: "Lalibela",
-    location: "Lalibela",
-    tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ'
-  },
-  {
-    key: "02",
-    id: "002",
-    nameOfDestination: "Debre Libanos",
-    location: "Fiche",
-    tags: 'ካቴድራል',
-  },
-  {
-    key: "03",
-    id: "003",
-    nameOfDestination: "Seminesh Kidanemhret",
-    location: "Semen Shewa",
-    tags: 'ገዳም',
-  },
-  {
-    key: "04",
-    id: "004",
-    nameOfDestination: "Gishen Mariam",
-    location: "Wello",
-    tags: 'ገዳም',
-  },
-  {
-    key: "05",
-    id: "005",
-    nameOfDestination: "Aksum Tsion",
-    location: "Aksum",
-    tags: 'ገዳም',
-  },
-  {
-    key: "06",
-    id: "006",
-    nameOfDestination: "Tana Kirkos",
-    location: "Tana",
-    tags: 'ገዳም',
-  },
-  {
-    key: "07",
-    id: "001",
-    nameOfDestination: "Lalibela",
-    location: "Lalibela",
-    tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ'
-  },
-  {
-    key: "08",
-    id: "002",
-    nameOfDestination: "Debre Libanos",
-    location: "Fiche",
-    tags: 'ካቴድራል',
-  },
-  {
-    key: "09",
-    id: "003",
-    nameOfDestination: "Seminesh Kidanemhret",
-    location: "Semen Shewa",
-    tags: 'ገዳም',
-  },
-  {
-    key: "10",
-    id: "004",
-    nameOfDestination: "Gishen Mariam",
-    location: "Wello",
-    tags: 'ገዳም',
-  },
-  {
-    key: "11",
-    id: "005",
-    nameOfDestination: "Aksum Tsion",
-    location: "Aksum",
-    tags: 'ገዳም',
-  },
-  {
-    key: "11",
-    id: "006",
-    nameOfDestination: "Tana Kirkos",
-    location: "Tana",
-    tags: 'ገዳም',
-  },
-];
 
-const tagTableData = [
-  {
-    key: '01',
-    name: 'ውቅር አብያት ክርስትያናት ',
-    description: 'በላሊበላ 11 ውቅር አብያተ ክርስትያናት አሉ...  ',
-  },
-];
 
-const handleDetail = (record) => {
-  console.log('Detail', record);
-};
-
-const handleEdit = (record) => {
-  console.log('Edit', record);
-};
-
-const handleDelete = (record) => {
-  console.log('Delete', record);
-};
-
-const handleSearch = (value) => {
-  // Implement search logic here
-  console.log('Search', value);
-};
 
 const Destination = (data, columns, onSave) => {
   const [selectedDestination, setSelectedDestination] = useState(null)
@@ -219,8 +35,8 @@ const Destination = (data, columns, onSave) => {
     setEditModalVisible(true);
   };
 
-  const handleDetailClick = (destination) => {
-    setSelectedDestination(destination);
+  const handleDetailClick = (record) => {
+    setSelectedDestination(record);
     setDetailModalVisible(true);
   };
 
@@ -374,13 +190,340 @@ const Destination = (data, columns, onSave) => {
       width: '18%',
       render: (_, record) => (
       <span>
-        <DetailIcon onClick={handleDetailClick} />
+        <DetailIcon onClick={() => handleDetailClick(record) } />
         <EditIcon onClick={handleEditClick} />
       </span>
       ),
     },
   ];
   
+  const tagTableColumns = [
+    {
+      title: 'name',
+      dataIndex: 'name',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortDirections: ['ascend', 'descend'],
+      width: '18%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search name"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    },
+    {
+      title: 'description',
+      dataIndex: 'description',
+      sorter: (a, b) => a.description.localeCompare(b.description),
+      sortDirections: ['ascend', 'descend'],
+      width: '18%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search description"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.description.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      width: '18%',
+      render: (_, record) => (
+      <span>
+        <DetailIcon onClick={() => handleDetailClick(record)} />
+        <EditIcon onClick={handleEditClick} />
+      </span>
+      ),
+    },
+  ];
+  
+  const destinationTableData = [
+    {
+      key: "01",
+      id: "001",
+      nameOfDestination: "Lalibela",
+      location: "Lalibela",
+      tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "02",
+      id: "002",
+      nameOfDestination: "Debre Libanos",
+      location: "Fiche",
+      tags: 'ካቴድራል',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "03",
+      id: "003",
+      nameOfDestination: "Seminesh Kidanemhret",
+      location: "Semen Shewa",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "04",
+      id: "004",
+      nameOfDestination: "Gishen Mariam",
+      location: "Wello",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "05",
+      id: "005",
+      nameOfDestination: "Aksum Tsion",
+      location: "Aksum",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "06",
+      id: "006",
+      nameOfDestination: "Tana Kirkos",
+      location: "Tana",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "07",
+      id: "001",
+      nameOfDestination: "Lalibela",
+      location: "Lalibela",
+      tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "08",
+      id: "002",
+      nameOfDestination: "Debre Libanos",
+      location: "Fiche",
+      tags: 'ካቴድራል',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "09",
+      id: "003",
+      nameOfDestination: "Seminesh Kidanemhret",
+      location: "Semen Shewa",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "10",
+      id: "004",
+      nameOfDestination: "Gishen Mariam",
+      location: "Wello",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "11",
+      id: "005",
+      nameOfDestination: "Aksum Tsion",
+      location: "Aksum",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+    {
+      key: "12",
+      id: "006",
+      nameOfDestination: "Tana Kirkos",
+      location: "Tana",
+      tags: 'ገዳም',
+      photos:[
+        {
+          id: 1,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+        {
+          id: 2,
+          url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+          caption: 'ethiopia'
+        },
+      ],
+      description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+    },
+  ];
+
+  const tagTableData = [
+    {
+      key: '01',
+      name: 'ውቅር አብያት ክርስትያናት ',
+      description: 'በላሊበላ 11 ውቅር አብያተ ክርስትያናት አሉ...  ',
+    },
+  ];
+
   const tabs = [
     {
       key: '1',
@@ -424,25 +567,32 @@ const Destination = (data, columns, onSave) => {
       </Modal>
 
       <Modal
+        title={`Destination detail${selectedDestination ? ` - ${selectedDestination.nameOfDestination}` : ''}`}
         visible={detailModalVisible}
         onCancel={handleDetailModalClose}
-        title="Destination Details"
         footer={null}
+        width={800}
       >
       {selectedDestination && (
-          <div>
-          {destinationTableColumns.map((column) => {
-            if (column.dataIndex !== 'action') {
-              return(
-                <Descriptions>
-                  <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedDestination[column.dataIndex]}</Descriptions.Item>
-                </Descriptions>
-              )
-            }  
-          })
-          }
+        <>
+          <div className="modal-content">
+            <h2>{selectedDestination.nameOfDestination}</h2>
+            <p>Destination: {selectedDestination.nameOfDestination}</p>
+            <p>Description: {selectedDestination.description}</p>
           </div>
-        )}
+
+          {selectedDestination.photos && (
+            <div className="modal-content">
+              <h3>Photo Gallery</h3>
+              <div className="photo-gallery">
+                {selectedDestination.photos.map((photo) => (
+                  <img key={photo.id} src={photo.url} alt={photo.caption} />
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
       </Modal>
     </div>     
   )

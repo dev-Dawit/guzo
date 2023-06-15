@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 
-import { Table, Button, Modal, Form, Input, DatePicker, Upload, message, Descriptions } from 'antd';
+import { Table, Button, Modal, Form, Input, Tabs, DatePicker, Upload, message, Descriptions } from 'antd';
 import { PlusOutlined, SearchOutlined, } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
@@ -17,6 +17,7 @@ import TableComponent from "../../../components/table/table";
 import { EditIcon } from '../../../components/actionIcons/edit/editIcon.component';
 import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
 
+const { TabPane } = Tabs;
 
 const handleDetail = (record) => {
   console.log('Detail', record);
@@ -39,6 +40,7 @@ const Agents = (data, columns,onSave) => {
     const [selectedAgent, setselectedAgent] = useState(null)
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [detailModalVisible, setDetailModalVisible] = useState(false);
+    const [activeTab, setActiveTab] = useState('1');
     const [form] = Form.useForm();
 
     const handleEditClick = () => {
@@ -64,6 +66,10 @@ const Agents = (data, columns,onSave) => {
         onSave(values);
       });
     }
+
+    const handleTabChange = (key) => {
+      setActiveTab(key);
+    };
 
     const agentTableColumns = [
       {
@@ -393,19 +399,31 @@ const Agents = (data, columns,onSave) => {
         onCancel={handleDetailModalClose}
         title="Agent Details"
         footer={null}
+        width= '70%'
       >
       {selectedAgent && (
-          <div>
-            {agentTableColumns.map((column) => {
-              if (column.dataIndex !== 'action') {
-                return(
-                  <Descriptions>
-                    <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedAgent[column.dataIndex]}</Descriptions.Item>
-                  </Descriptions>
-                )
-              }  
-            })
-            }
+          <div >
+            <Tabs activeKey={activeTab} onChange={handleTabChange}>
+              <TabPane tab="Basic" key="1">
+                
+              </TabPane>
+
+              <TabPane tab="በሂደት ላይ ያሉ ጉዞዎች" key="2">
+
+              </TabPane>
+
+              <TabPane tab="የተከናወኑ ጉዞዎች" key="3">
+                
+              </TabPane>
+
+              <TabPane tab="የተሰረዙ ጉዞዎች" key="4">
+              
+              </TabPane>
+
+              <TabPane tab="የምዕመናን አስተያየቶች" key="5">
+              
+              </TabPane>
+            </Tabs>
           </div>
         )}
       </Modal>

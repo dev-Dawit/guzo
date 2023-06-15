@@ -1,0 +1,19 @@
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .photo-gallery img {
+    max-width: 100%;
+    height: auto;
+  }
+  

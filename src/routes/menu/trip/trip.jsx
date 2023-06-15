@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 
-import { Table, Progress, Button, Modal, Form, Input, Upload, message, Select, DatePicker, Descriptions, Checkbox, Tag, } from 'antd';
+import { Table, Progress, Button, Modal, Form, Input, Tabs, Upload, message, Select, DatePicker, Descriptions, Checkbox, Tag, Row, Col} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
@@ -23,13 +23,14 @@ import { AddIcon, AddNewIcon } from '../../../components/actionIcons/add/addIcon
 import GlobalSearch from "../../../components/global search/globalSearch.component";
 import { ListIcon } from "../../../components/actionIcons/list/listIcon.component";
 
+
+const { TabPane } = Tabs;
+
 const renderTags = (tags) => {
   return tags.map((tag) => (
     <TagChip key={tag.id} name={tag.name} description={tag.description} />
   ));
 }
-
-
 
 const tagTableColumns = [
   {
@@ -138,11 +139,12 @@ const { Option } = Select;
 
 const Trip = (data, columns,onSave) => {
   const [selectedTrip, setselectedTrip] = useState(null)
+  const [detailModalVisible, setDetailModalVisible] = useState(false)
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [addPassengerModalVisible, setAddPassengerModalVisible] = useState(false);
   const [tripTypeModalities, setTripTypeModalities] = useState([]);
   const [isPassengersModalVisible, setIsPassengersModalVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState('1');
   const [form] = Form.useForm();
 
   const calculateDuration = (arrivalDate, departureDate) => {
@@ -180,8 +182,8 @@ const Trip = (data, columns,onSave) => {
     setEditModalVisible(true);
   };
 
-  const handleDetailClick = (destination) => {
-    setselectedTrip(destination);
+  const handleDetailClick = (record) => {
+    setselectedTrip(record);
     setDetailModalVisible(true);
   };
 
@@ -210,6 +212,10 @@ const Trip = (data, columns,onSave) => {
       onSave(values);
     });
   }
+
+  const handleTabChange = (key) => {
+    setActiveTab(key);
+  };
 
   const tripTablecolumns = [
     {
@@ -463,11 +469,11 @@ const Trip = (data, columns,onSave) => {
     {
       title: 'Action',
       dataIndex: 'action',
-      width: '20%',
+      width: '23%',
       render: (_, record) => (
       <span>
         <AddNewIcon onClick={handleAddPassenger}/>
-        <DetailIcon onClick={handleDetailClick} />
+        <DetailIcon onClick={() => handleDetailClick(record)} />
         <EditIcon onClick={handleEditClick} />
         <ListIcon onClick={() => handleViewPassengers(record)} />
       </span>
@@ -479,7 +485,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '01',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -494,15 +499,24 @@ const Trip = (data, columns,onSave) => {
         { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
       ],
       destination: {
-        destinationName: 'Destination A',
-        photos: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg'],
-        price: '$1000',
+        destinationName: 'Lalibela',
+        photos: [
+          {
+            id: 1,
+            url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+            caption: 'ethiopia'
+          },
+          {
+            id: 2,
+            url: '../../../assets/ethiopia-lalibela-church-ehtiopia-thumbnail.jpg',
+            caption: 'ethiopia'
+          },
+        ],
       },
     },
     {
       key: '01',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -520,7 +534,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '01',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -538,7 +551,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '01',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -556,7 +568,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '02',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -574,7 +585,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '03',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -592,7 +602,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '04',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -610,7 +619,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '06',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -628,7 +636,6 @@ const Trip = (data, columns,onSave) => {
     {
       key: '06',
       name: 'ልዩ የገና ጉዞ',
-      destinations: 'ላሊበላ',
       agent: 'ማህበረ ቅዱሳን',
       price: '500.00',
       departureDate: '02/01/2023',
@@ -728,6 +735,8 @@ const Trip = (data, columns,onSave) => {
       </div>,
     },
   ];
+
+  //const { name, destination, photos, price } = selectedTrip;
 
     return (
       <div>
@@ -873,30 +882,36 @@ const Trip = (data, columns,onSave) => {
           </Form.Item>
         </Form>
       </Modal>
+      
       <Modal
+        title={`Trip Detail${selectedTrip ? ` - ${selectedTrip.name}` : ''}`}
         visible={detailModalVisible}
         onCancel={handleDetailModalClose}
-        title="Trip Details"
         footer={null}
+        width={800}
       >
       {selectedTrip && (
-          <div>
-            {tripTablecolumns.map((column) => {
-              if (column.dataIndex !== 'action') {
-                return(
-                  <div>
-                    <Descriptions>
-                      <Descriptions.Item key={column.dataIndex} label={column.title}>{selectedTrip[column.dataIndex]}</Descriptions.Item>
-                    
-                    </Descriptions>
-                  </div>
-                  
-                )
-              }  
-            })
-            }
+        <>
+          <div className="modal-content">
+            <h2>{selectedTrip.name}</h2>
+            <p>Departure Date: {selectedTrip.departureDate}</p>
+            <p>Arrival Date: {selectedTrip.arrivalDate}</p>
+            <p>Place Of Departure: {selectedTrip.placeOfDeparture}</p>
+            <p>Agent: {selectedTrip.agent}</p>
+            <p>Price: {selectedTrip.price}</p>
           </div>
-        )}
+          {selectedTrip.destination.photos && (
+            <div className="modal-content">
+              <h3>Pictures of the Destination </h3>
+              <div className="photo-gallery">
+                {selectedTrip.destination.photos.map((photo) => (
+                  <img key={photo.id} src={photo.url} alt={photo.caption} />
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
       </Modal>
       <Modal
         title={`Passengers for ${selectedTrip ? selectedTrip.name : ''}`}
