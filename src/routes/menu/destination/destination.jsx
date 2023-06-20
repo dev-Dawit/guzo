@@ -1,7 +1,8 @@
 
 import {useState} from 'react';
 import { Space } from 'antd';
-import { Table, Button, Modal, Form, Input, Upload, message, Descriptions } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, message, Descriptions, } from 'antd';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
@@ -293,6 +294,9 @@ const Destination = (data, columns, onSave) => {
         },
       ],
       description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
+      registrationDate: '2022-10-01',
+      latitude: 123.456, // Example latitude value
+      longitude: 789.012, // Example longitude value
     },
     {
       key: "02",
@@ -579,6 +583,12 @@ const Destination = (data, columns, onSave) => {
             <h2>{selectedDestination.nameOfDestination}</h2>
             <p>Destination: {selectedDestination.nameOfDestination}</p>
             <p>Description: {selectedDestination.description}</p>
+            <p>Date of Registration: {selectedDestination.registrationDate}</p>
+            <MapContainer center={[selectedDestination.latitude, selectedDestination.longitude]} zoom={13} style={{ height: '400px' }}>
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <Marker position={[selectedDestination.latitude, selectedDestination.longitude]} />
+            </MapContainer>
+
           </div>
 
           {selectedDestination.photos && (
