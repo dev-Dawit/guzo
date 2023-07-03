@@ -32,3 +32,59 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+/* AgentDetail.css */
+
+
+.comments-tab {
+  padding: 24px;
+}
+
+.comments-tab-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.comments-tab-content p {
+  margin-bottom: 12px;
+}
+
+.comments-tab-content .ant-comment {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.comments-tab-content .ant-comment:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.comments-tab-content .ant-comment-avatar {
+  margin-right: 12px;
+}
+
+.comments-tab-content .ant-comment-content-detail {
+  margin-bottom: 8px;
+}
+
+.comments-tab-content .ant-comment-content-author {
+  font-weight: bold;
+}
+
+.comments-tab-content .ant-comment-content-author a {
+  color: #1890ff;
+}
+
+.comments-tab-content .ant-comment-content-author a:hover {
+  text-decoration: underline;
+}
+
+.comments-tab-content .ant-comment-content-date {
+  color: #999999;
+}
+
+.comments-tab-content .ant-comment-actions {
+  margin-top: 8px;
+}

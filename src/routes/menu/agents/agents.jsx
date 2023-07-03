@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { BreadCrumbSection } from "../../../components/breadCrumb/breadCrumb"
 
-import { Table, Button, Modal, Form, Input, Tabs, DatePicker, Upload, message, Descriptions } from 'antd';
+import { Table, Button, Modal, Form, Input, Tabs, DatePicker, Upload, message, Descriptions, Comment, Avatar } from 'antd';
 import { PlusOutlined, SearchOutlined, } from '@ant-design/icons';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
@@ -287,19 +287,32 @@ const Agents = (data, columns,onSave) => {
         level: '3 Star',
         status: 'Reliable',
         regDate: '01/01/2023',
+        count: '20',
         activeTrips: [
           {
             id: 1,
-            name: 'Trip 1',
-            destination: 'Destination A',
+            name: 'ልዩ የገና ጉዞ',
+            destination: 'ሳማ ሰንበት',
             // Add more trip details as needed
           },
           {
             id: 2,
-            name: 'Trip 2',
-            destination: 'Destination B',
+            name: 'ሳማ ሰንበት',
+            destination: 'ሳማ ሰንበት',
             // Add more trip details as needed
           },
+        ],
+        comments: [
+          {
+            id: 1,
+            author: 'ሃብቶም',
+            destination: 'ቅዱስ ላሊበላ',
+            avatar: '',
+            content: 'በጣም ደስ ብሎኛል',
+            datetime: '12/02/23',
+            // Add more trip details as needed
+          },
+          
         ]
       },
       {
@@ -424,7 +437,8 @@ const Agents = (data, columns,onSave) => {
       {selectedAgent && (
           <div className="custom-modal-content" >
             <h2 className="custom-modal-title">{`Agent Detail${selectedAgent ? ` - ${selectedAgent.name}` : ''}`}</h2>
-            <Tabs defaultActiveKey="basic" activeKey={activeTab} onChange={handleTabChange}>
+
+            <Tabs defaultActiveKey="basic">
               <TabPane tab="Basic" key="basic">
                 <div className="basic-tab">
                   <h2 className="basic-tab-title">Basic Information</h2>
@@ -481,6 +495,72 @@ const Agents = (data, columns,onSave) => {
                       <th>Trip ID</th>
                       <th>Name</th>
                       <th>Destination</th>
+                      <th>Passengers Count</th>
+                      {/* Add more table headers as needed */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedAgent.activeTrips.map((trip) => (
+                      <tr key={trip.id}>
+                        <td>{trip.id}</td>
+                        <td>{trip.name}</td>
+                        <td>{trip.destination}</td>
+                        <td>{trip.count}</td>
+                        {/* Add more table cells for additional trip details */}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            <br/>
+            <div className="custom-modal-footer">
+              <button className="custom-modal-button" onClick={handleDetailModalClose}>
+                Close
+              </button>
+            </div>
+              </TabPane>
+
+            <TabPane tab="የተከናወኑ ጉዞዎች" key="3">
+              <div className="table-container">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Trip ID</th>
+                      <th>Name</th>
+                      <th>Destination</th>
+                      <th>Passengers Count</th>
+                      {/* Add more table headers as needed */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedAgent.activeTrips.map((trip) => (
+                      <tr key={trip.id}>
+                        <td>{trip.id}</td>
+                        <td>{trip.name}</td>
+                        <td>{trip.destination}</td>
+                        <td>{trip.count}</td>
+                        {/* Add more table cells for additional trip details */}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <br/>
+              <div className="custom-modal-footer">
+                <button className="custom-modal-button" onClick={handleDetailModalClose}>
+                  Close
+                </button>
+              </div> 
+            </TabPane>
+
+            <TabPane tab="የተሰረዙ ጉዞዎች" key="4">
+              <div className="table-container">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Trip ID</th>
+                      <th>Name</th>
+                      <th>Destination</th>
                       {/* Add more table headers as needed */}
                     </tr>
                   </thead>
@@ -496,25 +576,30 @@ const Agents = (data, columns,onSave) => {
                   </tbody>
                 </table>
               </div>
-            <br/>
-            <div className="custom-modal-footer">
-              <button className="custom-modal-button" onClick={handleDetailModalClose}>
-                Close
-              </button>
-            </div>
-              </TabPane>
+              <br/>
+              <div className="custom-modal-footer">
+                <button className="custom-modal-button" onClick={handleDetailModalClose}>
+                  Close
+                </button>
+              </div>
+            </TabPane>
 
-              <TabPane tab="የተከናወኑ ጉዞዎች" key="3">
-                
-              </TabPane>
-
-              <TabPane tab="የተሰረዙ ጉዞዎች" key="4">
-              
-              </TabPane>
-
-              <TabPane tab="የምዕመናን አስተያየቶች" key="5">
-              
-              </TabPane>
+            <TabPane tab="የምዕመናን አስተያየቶች" key="5">
+            <div className="comments-tab">
+            <h2 className="comments-tab-title">Comments</h2>
+            
+              {selectedAgent.comments.map((comment) => (
+                <div className="comments-tab-content" key={comment.id}>
+                  <span className="comment-author">{comment.author}</span>
+                  <span avatar={<Avatar src={comment.avatar} alt={comment.author} />}></span>
+                  {<p>{comment.content}</p>} 
+                  <span> datetime={comment.datetime} </span>
+                </div>
+              ))}
+              {selectedAgent.comments.length === 0 && <p>No comments available.</p>}
+            
+          </div>
+            </TabPane>
             </Tabs>
           </div>
         )}

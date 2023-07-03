@@ -1,7 +1,7 @@
 
 import {useState} from 'react';
 import { Space } from 'antd';
-import { Table, Button, Modal, Form, Input, Upload, message, Descriptions, } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, message, Descriptions, Popconfirm, Divider } from 'antd';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
@@ -9,27 +9,23 @@ import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
 import TableComponent from "../../../components/table/table"
 
-import {
-  FolderOpenOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
 import TabComponent from '../../../components/tabs/tab';
 import AddNewDestinationModal from '../../../components/modals/addNewDestinationModal.component';
 
 import { EditIcon } from '../../../components/actionIcons/edit/editIcon.component';
 import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
+import { Delete } from '../../../components/actionIcons/delete/delete';
+import AddNewTag from '../../../components/modals/addNewTag.component';
+import TextArea from 'antd/es/input/TextArea';
 
 const itemsPerPage = 10;
 
 
-
-
-
-const Destination = (data, columns, onSave) => {
+const Destination = (data, columns, onSave, onDelete, onCancel) => {
   const [selectedDestination, setSelectedDestination] = useState(null)
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [destinationData, setDestinationData] = useState([]);
   const [form] = Form.useForm();
 
   const handleEditClick = () => {
@@ -48,6 +44,11 @@ const Destination = (data, columns, onSave) => {
 
   const handleDetailModalClose = () => {
     setDetailModalVisible(false);
+  };
+
+  const handleDelete = (id) => {
+    const updatedData = destinationData.filter((destination) => destination.id !== id);
+    setDestinationData(updatedData);
   };
 
   const handleSave = () => {
@@ -153,6 +154,38 @@ const Destination = (data, columns, onSave) => {
 
     },
     {
+      title: 'ንግስ በአላት',
+      dataIndex: 'nigs',
+      sorter: (a, b) => a.nigs.localeCompare(b.nigs),
+      sortDirections: ['ascend', 'descend'],
+      width: '18%',
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search location"
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+          Search
+          </Button>
+          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      onFilter: (value, record) => record.nigs.toLowerCase().includes(value.toLowerCase()),
+      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+
+    },
+    {
       title: 'tags',
       dataIndex: 'tags',
       sorter: (a, b) => a.tags.localeCompare(b.tags),
@@ -193,6 +226,14 @@ const Destination = (data, columns, onSave) => {
       <span>
         <DetailIcon onClick={() => handleDetailClick(record) } />
         <EditIcon onClick={handleEditClick} />
+        <Popconfirm
+          title="Are you sure you want to delete this destination?"
+          onConfirm={() => handleDelete(record.id)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Delete />
+        </Popconfirm>
       </span>
       ),
     },
@@ -533,14 +574,21 @@ const Destination = (data, columns, onSave) => {
       key: '1',
       title: 'የመዳረሻዎች ዝርዝር',
       content: <div>
-        <TableComponent title = {'Destinations'} columns={destinationTableColumns} dataSource={destinationTableData} itemsPerPage= {itemsPerPage} modal={AddNewDestinationModal} />
+        <TableComponent 
+          title = {'Destinations'} 
+          columns={destinationTableColumns} 
+          dataSource={destinationTableData} 
+          itemsPerPage= {itemsPerPage} 
+          modal={AddNewDestinationModal} 
+          onDelete={handleDelete} 
+        />
       </div>,
     },
     {
       key: '2',
       title: 'Tag',
       content: <div>  
-          <TableComponent columns={tagTableColumns} dataSource={tagTableData} modal={AddNewDestinationModal} />
+          <TableComponent columns={tagTableColumns} dataSource={tagTableData} modal={AddNewTag} />
       </div>,
     },
   ];
@@ -568,6 +616,30 @@ const Destination = (data, columns, onSave) => {
             <Input />
           </Form.Item>
         </Form>
+        <Divider />
+
+          {/* Edit Tags */}
+          <h3>Edit Tags</h3>
+          <Form form={form}>
+            <Form.Item
+              name="nameOfTag"
+              label="Name of Tag"
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="description of tag"
+              label="የመዳረሻ አድራሻ"
+            >
+              <TextArea />
+            </Form.Item>
+          </Form>
+
+          {/* Save and Cancel buttons */}
+          <div>
+            <Button onClick={handleSave}>Save</Button>
+            <Button onClick={onCancel}>Cancel</Button>
+          </div>
       </Modal>
 
       <Modal

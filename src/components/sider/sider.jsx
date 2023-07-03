@@ -84,13 +84,19 @@ export const SiderSection = () => {
             <Menu.Item key="10" icon={<FileOutlined />}>
                 <Link to='/report'>Report</Link>
             </Menu.Item>
-            <Menu.Item key="11" icon={<SettingOutlined />}>
+            <Menu.Item key="11" icon={<FileOutlined />}>
+                <Link to='/dispute'>Dispute</Link>
+            </Menu.Item>
+            <Menu.Item key="12" icon={<SettingOutlined />}>
                 <Link to='/userAdmin'>userAdmin</Link>
             </Menu.Item>
-            <Menu.Item key="12" icon={<LockOutlined />}>
+            <Menu.Item key="13" icon={<SettingOutlined />}>
+                <Link to='/settings'>settings</Link>
+            </Menu.Item>
+            <Menu.Item key="14" icon={<LockOutlined />}>
                 <Link to='/accessControl'>AccessControl</Link>
             </Menu.Item>
-            <Menu.Item key="13" icon={<SearchOutlined  />}>
+            <Menu.Item key="15" icon={<SearchOutlined  />}>
                 <Link to='/lookUp'>lookUp</Link>
             </Menu.Item>
           </Menu>

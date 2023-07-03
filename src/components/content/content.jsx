@@ -15,6 +15,8 @@ import UserAdmin from '../../routes/menu/userAdmin/userAdmin';
 import Nigs from '../../routes/menu/nigs/nigs.component';
 import Marketing from '../../routes/menu/marketing/marketing.component';
 import Kdusan from '../../routes/menu/kdusan/kdusan.component';
+import Dispute from '../../routes/menu/dispute/dispute';
+import Settings from '../../routes/menu/settings/settings';
 
 const { Content,} = Layout;
 
@@ -46,6 +48,8 @@ export const ContentSection = () => {
             <Route path='/lookUp' element={<LookUp />}/>
             <Route path='/nigs' element={<Nigs />}/>
             <Route path='/kdusan' element={<Kdusan />}/>
+            <Route path='/settings' element={<Settings />}/>
+            <Route path='/dispute' element={<Dispute />}/>
         </Routes>
     </Content>
   )
