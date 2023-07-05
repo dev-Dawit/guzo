@@ -357,7 +357,10 @@ const Nigs = (data, columns,onSave) => {
       onFilter: (value, record) => record.nameOfKdus.toLowerCase().includes(value.toLowerCase()),
       filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     },
-    { title: 'Tags', dataIndex: 'tags', key: 'tags', render: renderTags 
+    { title: 'Tags',
+      dataIndex: 'tags', 
+      key: 'tags', 
+      render: renderTags 
     },
     {
       title: 'Action',

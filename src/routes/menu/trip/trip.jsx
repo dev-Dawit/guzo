@@ -9,9 +9,6 @@ import TableComponent from "../../../components/table/table";
 
 import {
   FolderOpenOutlined,
- 
-  DeleteOutlined,
-  EyeOutlined,
 } from "@ant-design/icons";
 import TabComponent from "../../../components/tabs/tab";
 import AddNewTripModal from "../../../components/modals/addNewTrip.component";
@@ -22,6 +19,8 @@ import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIco
 import { AddIcon, AddNewIcon } from '../../../components/actionIcons/add/addIcon.component';
 import GlobalSearch from "../../../components/global search/globalSearch.component";
 import { ListIcon } from "../../../components/actionIcons/list/listIcon.component";
+import { TransferIcon } from "../../../components/actionIcons/transfer/transferIcon.components";
+import TableInModal from "../../../components/tableInModal/tableInModal";
 
 
 const { TabPane } = Tabs;
@@ -254,7 +253,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'destinations',
       sorter: (a, b) => a.destinations - b.destinations,
       sortDirections: ['ascend', 'descend'],
-      width: '15%',
+      width: '20%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -285,7 +284,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'agent',
       sorter: (a, b) => a.agent.localeCompare(b.agent),
       sortDirections: ['ascend', 'descend'],
-      width: '18%',
+      width: '25%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -316,7 +315,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'price',
       sorter: (a, b) => a.price.localeCompare(b.price),
       sortDirections: ['ascend', 'descend'],
-      width: '10%',
+      width: '20%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -347,7 +346,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'departureDate',
       sorter: (a, b) => a.departureDate - b.departureDate,
       sortDirections: ['ascend', 'descend'],
-      width: '18%',
+      width: '28%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -378,7 +377,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'arrivalDate',
       sorter: (a, b) => a.arrivalDate.localeCompare(b.arrivalDate),
       sortDirections: ['ascend', 'descend'],
-      width: '18%',
+      width: '28%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -419,7 +418,7 @@ const Trip = (data, columns,onSave) => {
       dataIndex: 'placeOfDeparture',
       sorter: (a, b) => a.placeOfDeparture.localeCompare(b.placeOfDeparture),
       sortDirections: ['ascend', 'descend'],
-      width: '18%',
+      width: '25%',
       filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
           <Input
@@ -446,10 +445,10 @@ const Trip = (data, columns,onSave) => {
       filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     },
     {
-      title: 'Progress',
+      title: 'የተመዘገቡ ምዕመናን',
       dataIndex: 'progress',
       key: 'progress',
-      width: '18%',
+      width: '23%',
       render: (text, record) => (
         <Tag >{record.sitsOccupied} / {record.totalSits}</Tag>
       ),
@@ -458,18 +457,18 @@ const Trip = (data, columns,onSave) => {
       title: 'Modality',
       dataIndex: 'modality',
       key: 'modality',
-      width: '18%',
+      width: '25%',
     },
     { title: 'Tags',
       dataIndex: 'tags', 
       key: 'tags', 
-      width: '18%',
+      width: '80%',
       render: renderTags 
     },
     {
       title: 'Action',
       dataIndex: 'action',
-      width: '23%',
+      width: '28%',
       render: (_, record) => (
       <span>
         <AddNewIcon onClick={handleAddPassenger}/>
@@ -513,6 +512,11 @@ const Trip = (data, columns,onSave) => {
           },
         ],
       },
+      passengers: [
+        { phone: '0911111111', name: 'አብርሃም',  },
+        { phone: '0912121122', name: 'ሃብቶም',  },
+        { phone: '0913131333', name: 'ዳዊት',  },
+      ],
     },
     {
       key: '01',
@@ -736,6 +740,18 @@ const Trip = (data, columns,onSave) => {
     },
   ];
 
+  const tableInModalColumns = [
+    { key: 'name', title: 'Name' },
+    { key: 'phone', title: 'Phone number' },
+    // Add more columns as needed
+  ];
+
+  const handleTransfer = (id) => {
+    // Handle the transfer action
+    console.log(`Transfer passenger with ID ${id}`);
+  };
+  
+
   //const { name, destination, photos, price } = selectedTrip;
 
     return (
@@ -921,13 +937,9 @@ const Trip = (data, columns,onSave) => {
       >
         {/* Render passengers list here */}
         {selectedTrip && selectedTrip.passengers && selectedTrip.passengers.length > 0 ? (
-          <ul>
-            {selectedTrip.passengers.map((passenger) => (
-              <li key={passenger.id}>
-                {passenger.name} - {passenger.phoneNumber}
-              </li>
-            ))}
-          </ul>
+          <div className="table-container">
+           <TableInModal columns={tableInModalColumns} data={selectedTrip.passengers} handleAction={handleTransfer}/>
+          </div>
         ) : (
           <p>No passengers found for this trip.</p>
         )}

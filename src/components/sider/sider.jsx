@@ -48,15 +48,14 @@ export const SiderSection = () => {
     )
 
     return (
-        <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed} style={{ background: '#f0f2f5',}}>
-          <div className="logo" />
+      <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed} style={{ background: '#f0f2f5', overflowY: 'auto' }}>
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<HomeOutlined />}>
               <Link to='/'>Home</Link>
             </Menu.Item>
-            <Menu.Item key="1" icon={<HomeOutlined />}>
+            {/*<Menu.Item key="1" icon={<HomeOutlined />}>
               <Link to='/'>Dashboard</Link>
-            </Menu.Item>
+            </Menu.Item>*/}
             <Menu.Item key="2" icon={<DestinationIcon />}>
                 <Link to='/destination'>Destination</Link>
             </Menu.Item>

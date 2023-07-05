@@ -1,5 +1,5 @@
 import { Routes, Route} from 'react-router-dom';
-import  Theme  from '../src/components/layout';
+import  Theme  from './components/layout/layout';
 
 const App = () => {
   return(

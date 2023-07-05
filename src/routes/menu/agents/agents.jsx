@@ -17,6 +17,7 @@ import '../../../components/actionIcons/openDetail/detailIcon.component';
 
 import { EditIcon } from '../../../components/actionIcons/edit/editIcon.component';
 import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
+import TableInModal from "../../../components/tableInModal/tableInModal";
 
 const { TabPane } = Tabs;
 
@@ -305,14 +306,20 @@ const Agents = (data, columns,onSave) => {
         comments: [
           {
             id: 1,
-            author: 'ሃብቶም',
-            destination: 'ቅዱስ ላሊበላ',
-            avatar: '',
+            nameOfPassenger: 'ሃብቶም',
             content: 'በጣም ደስ ብሎኛል',
             datetime: '12/02/23',
             // Add more trip details as needed
           },
-          
+        ],
+        desputes: [
+          {
+            id: 1,
+            nameOfPassenger: 'ሃብቶም',
+            despute: 'ያልተገቡ ነገሮች አይቻለሁ',
+            datetime: '12/02/23',
+          }, 
+          // Add more desputes as needed
         ]
       },
       {
@@ -389,6 +396,37 @@ const Agents = (data, columns,onSave) => {
       },
     ];
 
+    const tableInModalColumns = [
+      { key: 'id', title: 'ID' },
+      { key: 'name', title: 'Name' },
+      { key: 'destination', title: 'Destination' },
+      { key: 'passengerCount', title: 'Passengers Count' },
+      // Add more columns as needed
+    ];
+
+    const tableInModalColumnForCancledTrips = [
+      { key: 'id', title: 'ID' },
+      { key: 'name', title: 'Name' },
+      { key: 'destination', title: 'Destination' },
+      // Add more columns as needed
+    ];
+
+    const tableInModalColumnsForPassengersComments = [
+      { key: 'id', title: 'ID' },
+      { key: 'nameOfPassenger', title: 'Name of Passenger' },
+      { key: 'comment', title: 'Comment' },
+      { key: 'datetime', title: 'Date' },
+      // Add more columns as needed
+    ];
+
+    const tableInModalColumnsForPassengersDesputes = [
+      { key: 'id', title: 'ID' },
+      { key: 'nameOfPassenger', title: 'Name of Passenger' },
+      { key: 'despute', title: 'Despute' },
+      { key: 'datetime', title: 'Date' },
+      // Add more columns as needed
+    ];
+
     return (
       <div>
         <TableComponent title ={'Agents'} columns={agentTableColumns} dataSource={agentTableData} modal={AddNewAgentModal} />
@@ -402,25 +440,15 @@ const Agents = (data, columns,onSave) => {
           <Form form={form}>
           <Form.Item
             name="name"
-            label="የበዓሉ ስም"
+            label="Agent name"
             rules={[{ required: true, message: 'ስም' }]}
           >
             <Input />
           </Form.Item>
+          
           <Form.Item
-          name="dateOfDeparture"
-          label="Date of Departure"
-          rules={[
-            {
-              message: 'Please select the date of departure!',
-            },
-          ]}
-          >
-            <DatePicker />
-          </Form.Item>
-          <Form.Item
-            name="nameOfKdusan"
-            label="የሚከብሩ ቅዱሳን"
+            name="address"
+            label="Address"
             rules={[{ required: true, message: 'መዳረሻ' }]}
           >
             <input />
@@ -488,30 +516,9 @@ const Agents = (data, columns,onSave) => {
               </TabPane>
 
               <TabPane tab="በሂደት ላይ ያሉ ጉዞዎች" key="2">
-              <div className="table-container">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Trip ID</th>
-                      <th>Name</th>
-                      <th>Destination</th>
-                      <th>Passengers Count</th>
-                      {/* Add more table headers as needed */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedAgent.activeTrips.map((trip) => (
-                      <tr key={trip.id}>
-                        <td>{trip.id}</td>
-                        <td>{trip.name}</td>
-                        <td>{trip.destination}</td>
-                        <td>{trip.count}</td>
-                        {/* Add more table cells for additional trip details */}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                <div className="table-container">
+                  <TableInModal columns={tableInModalColumns} data={selectedAgent.activeTrips} />
+                </div>
             <br/>
             <div className="custom-modal-footer">
               <button className="custom-modal-button" onClick={handleDetailModalClose}>
@@ -522,28 +529,7 @@ const Agents = (data, columns,onSave) => {
 
             <TabPane tab="የተከናወኑ ጉዞዎች" key="3">
               <div className="table-container">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Trip ID</th>
-                      <th>Name</th>
-                      <th>Destination</th>
-                      <th>Passengers Count</th>
-                      {/* Add more table headers as needed */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedAgent.activeTrips.map((trip) => (
-                      <tr key={trip.id}>
-                        <td>{trip.id}</td>
-                        <td>{trip.name}</td>
-                        <td>{trip.destination}</td>
-                        <td>{trip.count}</td>
-                        {/* Add more table cells for additional trip details */}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <TableInModal columns={tableInModalColumns} data={selectedAgent.activeTrips} />
               </div>
               <br/>
               <div className="custom-modal-footer">
@@ -555,26 +541,7 @@ const Agents = (data, columns,onSave) => {
 
             <TabPane tab="የተሰረዙ ጉዞዎች" key="4">
               <div className="table-container">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Trip ID</th>
-                      <th>Name</th>
-                      <th>Destination</th>
-                      {/* Add more table headers as needed */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedAgent.activeTrips.map((trip) => (
-                      <tr key={trip.id}>
-                        <td>{trip.id}</td>
-                        <td>{trip.name}</td>
-                        <td>{trip.destination}</td>
-                        {/* Add more table cells for additional trip details */}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <TableInModal columns={tableInModalColumnForCancledTrips} data={selectedAgent.activeTrips} />
               </div>
               <br/>
               <div className="custom-modal-footer">
@@ -585,20 +552,25 @@ const Agents = (data, columns,onSave) => {
             </TabPane>
 
             <TabPane tab="የምዕመናን አስተያየቶች" key="5">
-            <div className="comments-tab">
-            <h2 className="comments-tab-title">Comments</h2>
-            
-              {selectedAgent.comments.map((comment) => (
-                <div className="comments-tab-content" key={comment.id}>
-                  <span className="comment-author">{comment.author}</span>
-                  <span avatar={<Avatar src={comment.avatar} alt={comment.author} />}></span>
-                  {<p>{comment.content}</p>} 
-                  <span> datetime={comment.datetime} </span>
-                </div>
-              ))}
-              {selectedAgent.comments.length === 0 && <p>No comments available.</p>}
-            
-          </div>
+              <div className="comments-tab">
+                {selectedAgent.comments.map((comment) => (
+                  <div className="comments-tab-content" key={comment.id}>
+                    <TableInModal columns={tableInModalColumnsForPassengersComments} data={selectedAgent.comments} />
+                  </div>
+                ))}
+                {selectedAgent.comments.length === 0 && <p>No comments available.</p>}
+              </div>
+            </TabPane>
+
+            <TabPane tab="የምዕመናን ቅሬታዎች" key="6">
+              <div className="comments-tab">
+                {selectedAgent.desputes.map((despute) => (
+                  <div className="comments-tab-content" key={despute.id}>
+                    <TableInModal columns={tableInModalColumnsForPassengersDesputes} data={selectedAgent.desputes} />
+                  </div>
+                ))}
+                {selectedAgent.desputes.length === 0 && <p>No desputes available.</p>}
+              </div>
             </TabPane>
             </Tabs>
           </div>

@@ -25,13 +25,14 @@ export const ContentSection = () => {
   return (
     <Content
         style={{
-            padding: 24,
+            paddingTop: 5,
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingBottom:0,
             margin: 0,
             minHeight: '30%',
             background: '#D3D3D3',
             height: 'calc(100vh - 8vh)', 
-            overflowX: 'auto',
-            overflowY: 'auto'
         }}
     >
         <Routes>

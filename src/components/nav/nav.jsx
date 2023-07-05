@@ -9,9 +9,9 @@ export const Nav = () => {
     return (
       <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-between'}}>
         <div style={{marginRight: '20px'}} >
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="horizontal" style={{display: 'flex'}}>
-            <Menu.Item key="1" icon={ <HomeOutlined /> }  > 
-              Home
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="horizontal" style={{display: 'flex', width: '100px'}}>
+            <Menu.Item key="1"   > 
+              መንፈሳዊ ጉዞ
             </Menu.Item>
           </Menu>
         </div>

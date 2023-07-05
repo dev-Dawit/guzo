@@ -28,36 +28,40 @@ const TableComponent = ({ title, dataSource, columns, modal: ModalComponent }) =
   };
 
   return (
-    <div style={{display: 'flex',}}>
-      <div  style={{  }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1 style={{ fontSize: '1.5rem' }}>{title}</h1>
+        {/* Controls the title and add new modal */}
+        <h1 style={{ fontSize: '1rem' }}>{title}</h1>
         <div style={{ display: 'flex' }}>
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             {title}
           </Button>
         </div>
       </div>
-      <Table
-        style={{flex: 1, overflowY: 'auto', overflowX: 'auto'}}
-        columns={columns}
-        dataSource={dataSource}
-        pagination={{ pageSize: 5 }}
-        scroll={{ y: 'calc(100vh - 190px)' }}
-        title={() => {return title}}
-      />
-      {columns.map((column) => (
-        <Column key={column.dataIndex} {...column} />
-      ))}
-      <ModalComponent
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      />
+    <div style={{ flex: '1', overflow: 'auto' }}>
+      <div style={{ height: '100%', overflow: 'auto' }}>
+        <Table
+          style={{ minWidth: '100%', overflow: 'auto' }}
+          columns={columns}
+          dataSource={dataSource}
+          pagination={{ pageSize: 5 }}
+          scroll={{ y: '100%', x: '100%' }}
+          title={() => title}
+        />
       </div>
-      </div>
-  );
-};
+    </div>
+    {columns.map((column) => (
+      <Column key={column.dataIndex} {...column} />
+    ))}
+    <ModalComponent
+      visible={isModalVisible}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    />
+  </div>
+  )
+
+}
 
 export default TableComponent;
 

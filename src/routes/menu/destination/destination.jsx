@@ -16,10 +16,16 @@ import { EditIcon } from '../../../components/actionIcons/edit/editIcon.componen
 import { DetailIcon } from '../../../components/actionIcons/openDetail/detailIcon.component';
 import { Delete } from '../../../components/actionIcons/delete/delete';
 import AddNewTag from '../../../components/modals/addNewTag.component';
+import TagChip from "../../../components/tagChip/tagChip.component";
 import TextArea from 'antd/es/input/TextArea';
 
 const itemsPerPage = 10;
 
+const renderTags = (tags) => {
+  return tags.map((tag) => (
+    <TagChip key={tag.id} name={tag.name} description={tag.description} />
+  ));
+}
 
 const Destination = (data, columns, onSave, onDelete, onCancel) => {
   const [selectedDestination, setSelectedDestination] = useState(null)
@@ -186,37 +192,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
 
     },
     {
-      title: 'tags',
+      title: 'Tags',
       dataIndex: 'tags',
-      sorter: (a, b) => a.tags.localeCompare(b.tags),
-      sortDirections: ['ascend', 'descend'],
-      width: '18%',
-      
-      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            placeholder="Search tags"
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => confirm()}
-            style={{ width: 188, marginBottom: 8, display: 'block' }}
-          />
-          <Button
-            type="primary"
-            onClick={() => confirm()}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90, marginRight: 8 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </div>
-      ),
-      onFilter: (value, record) => record.tags.toLowerCase().includes(value.toLowerCase()),
-      filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-      
+      width: '40%', 
+      key: 'tags', 
+      render: renderTags  
     },
     {
       title: 'Action',
@@ -321,7 +301,6 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "001",
       nameOfDestination: "Lalibela",
       location: "Lalibela",
-      tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ',
       photos:[
         {
           id: 1,
@@ -334,6 +313,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
           caption: 'ethiopia'
         },
       ],
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       description: "The 11 churches at Lalibela, Ethiopia, are regarded as one of the wonders of the world, excavated from solid rock with an immense underground maze of tunnels and passages. There are two main groups of churches, with another church dedicated to Saint George a short distance away.",
       registrationDate: '2022-10-01',
       latitude: 123.456, // Example latitude value
@@ -344,7 +328,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "002",
       nameOfDestination: "Debre Libanos",
       location: "Fiche",
-      tags: 'ካቴድራል',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -364,7 +352,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "003",
       nameOfDestination: "Seminesh Kidanemhret",
       location: "Semen Shewa",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -384,7 +376,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "004",
       nameOfDestination: "Gishen Mariam",
       location: "Wello",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -404,7 +400,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "005",
       nameOfDestination: "Aksum Tsion",
       location: "Aksum",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -424,7 +424,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "006",
       nameOfDestination: "Tana Kirkos",
       location: "Tana",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -444,7 +448,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "001",
       nameOfDestination: "Lalibela",
       location: "Lalibela",
-      tags: 'ገዳም፤ ውቅር አብያተ ክርስትያናት፤  በ UNISCO የተመዘገበ',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -464,7 +472,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "002",
       nameOfDestination: "Debre Libanos",
       location: "Fiche",
-      tags: 'ካቴድራል',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -484,7 +496,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "003",
       nameOfDestination: "Seminesh Kidanemhret",
       location: "Semen Shewa",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -504,7 +520,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "004",
       nameOfDestination: "Gishen Mariam",
       location: "Wello",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -524,7 +544,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "005",
       nameOfDestination: "Aksum Tsion",
       location: "Aksum",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
@@ -544,7 +568,11 @@ const Destination = (data, columns, onSave, onDelete, onCancel) => {
       id: "006",
       nameOfDestination: "Tana Kirkos",
       location: "Tana",
-      tags: 'ገዳም',
+      tags: [
+        { id: 1, name: 'Tag 1', description: 'Short description for Tag 1' },
+        { id: 2, name: 'Tag 2', description: 'Short description for Tag 2' },
+        { id: 3, name: 'Tag 3', description: 'Short description for Tag 3' },
+      ],
       photos:[
         {
           id: 1,
